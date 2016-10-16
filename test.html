@@ -8,47 +8,43 @@
 	var valid = [0,1,1,1,1];
 	var i = 0;
 	document.getElementById("pertanyaan").innerHTML = quest[i][0];
-	function tanya(){
-		document.getElementById("pertanyaan").innerHTML = quest[i][0];
-	}
 	function ya(){
-		var j;
+		var j, sum = 0, ans;
 		for (j = 1; j <= 4; j++){
 			if (valid[j] == 1){
 				valid[j] = quest[i][j];
-			}
-		}
-		i += 1;
-		var sum = 0, ans;
-		for (j = 1; j <= 4; j++){
-			if (valid[j] == 1){
-				ans = j;
-				sum += 1;
+				if (valid[j] == 1){
+					sum += 1;
+					ans = j;
+				}
 			}
 		}
 		if (sum == 1){
 			document.getElementById("pertanyaan").innerHTML = "Jawaban = " + (ans-1);
 		}
-		tanya();
+		else{
+			i += 1;
+			document.getElementById("pertanyaan").innerHTML = quest[i][0];
+		}
 	}
 	function tidak(){
+		var j, sum = 0, ans;
 		for (j = 1; j <= 4; j++){
 			if (valid[j] == 1){
 				valid[j] = 1-quest[i][j];
-			}
-		}
-		i += 1;
-		var sum = 0, ans;
-		for (j = 1; j <= 4; j++){
-			if (valid[j] == 1){
-				ans = j;
-				sum += 1;
+				if (valid[j] == 1){
+					sum += 1;
+					ans = j;
+				}
 			}
 		}
 		if (sum == 1){
 			document.getElementById("pertanyaan").innerHTML = "Jawaban = " + (ans-1);
 		}
-		tanya();
+		else{
+			i += 1;
+			document.getElementById("pertanyaan").innerHTML = quest[i][0];
+		}
 	}
 
 </script>
