@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<p id="pertanyaan"></p>
+<script>
+	var quest = [["Apakah bit 0 = 1?",0,1,0,1], ["Apakah bit 1 = 1?",0,0,1,1]];
+	var valid = [0,1,1,1,1];
+	var i = 0;
+	document.getElementById("pertanyaan").innerHTML = quest[i][0];
+	function tanya(){
+		document.getElementById("pertanyaan").innerHTML = quest[i][0];
+	}
+	function ya(){
+		var j;
+		for (j = 1; j <= 4; j++){
+			if (valid[j] == 1){
+				valid[j] = quest[i][j];
+			}
+		}
+		i += 1;
+		var sum = 0, ans;
+		for (j = 1; j <= 4; j++){
+			if (valid[j] == 1){
+				ans = j;
+				sum += 1;
+			}
+		}
+		if (sum == 1){
+			document.getElementById("pertanyaan").innerHTML = "Jawaban = " + (ans-1);
+		}
+		tanya();
+	}
+	function tidak(){
+		for (j = 1; j <= 4; j++){
+			if (valid[j] == 1){
+				valid[j] = 1-quest[i][j];
+			}
+		}
+		i += 1;
+		var sum = 0, ans;
+		for (j = 1; j <= 4; j++){
+			if (valid[j] == 1){
+				ans = j;
+				sum += 1;
+			}
+		}
+		if (sum == 1){
+			document.getElementById("pertanyaan").innerHTML = "Jawaban = " + (ans-1);
+		}
+		tanya();
+	}
+
+</script>
+
+
+<button type="button" onclick = ya();> Ya </button>
+<button type="button" onclick = tidak();> Tidak </button>
+
+</body>
+</html>
+
