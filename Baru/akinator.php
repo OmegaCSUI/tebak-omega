@@ -41,7 +41,7 @@
 		echo $jaw;
 		session_unset();
 		session_destroy();
-		echo "<a href='a.php'>Restart</a>";
+		echo "<a href='test.php'>Restart</a>";
 	}
 	else{
 		$soal = 0;
