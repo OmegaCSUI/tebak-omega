@@ -2,19 +2,19 @@
  Buka test.php
 
 # Fitur yang udah ada
- Tombol ya/tidak udah hilang pas beres
- Soal udah keshuffle
+1. Tombol ya/tidak udah hilang pas beres
+2. Soal udah keshuffle
 
 # To do list
- Tambahin:
- 	Layout
- 	Leaderboard paling banyak ditebak
- 	Leaderboard paling banyak diprotes
- 	Dashboard
- 	Nampilin riwayat jawaban pas udah selesai
- 	Tombol protes kalo gak sesuai pikiran player
- 	Jawaban yang bener kalo diprotes
- Benerin:
- 	Nama variabel
- 	Struktur kode
- 	Bikin gabisa akses akinator.php
+* Tambahin:
+	1. Layout
+	2. Leaderboard paling banyak ditebak
+	3. Leaderboard paling banyak diprotes
+	4. Dashboard
+	5. Nampilin riwayat jawaban pas udah selesai
+	6. Tombol protes kalo gak sesuai pikiran player
+	7. Jawaban yang bener kalo diprotes
+* Benerin:
+	1. Nama variabel
+	2. Struktur kode
+	3. Bikin gabisa akses akinator.php
