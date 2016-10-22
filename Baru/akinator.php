@@ -1,13 +1,7 @@
 <?php
 	session_start();
-  	if(!isset($_SESSION['VALID'])){
-		$orang = array(0, 1, 1, 1, 1);
-		$udah = array(0,0,0);
-		$_SESSION['VALID'] = $orang;
-		$_SESSION['SUDAH'] = $udah;
-  	}
 
-	$sum = 0;
+	$GLOBALS['sum'] = 0;
 	$jaw = 0;
 
 	$host = "localhost";
@@ -17,31 +11,38 @@
 	$tbl_name = "pertanyaan";
 	$link = mysqli_connect("$host", "$username", "$password", "$db_name");
 
-
   	if (isset($_GET['ya'])){
-  		if ($_GET['ya'] == 1)
-  			$a = 0;
-  		
-  		else
-  			$a = 1;
-  		
-		for ($x = 1; $x <= 4; $x++){
-			if ($_SESSION['VALID'][$x] == 0)
-				continue;
-			if ($_SESSION['JAWABAN'][$x] == $a)
-				$_SESSION['VALID'][$x] = 0;
-			else{
-				$jaw = $x-1;
-				$sum++;
+  		if ($_GET['ya'] == 9){
+			session_unset();
+			// session_destroy();
+			$orang = array(0, 1, 1, 1, 1);
+			$udah = array(0,0,0);
+			$_SESSION['VALID'] = $orang;
+			$_SESSION['SUDAH'] = $udah;
+  		}
+  		else{
+	  		if ($_GET['ya'] == 1)
+	  			$a = 0;
+	  		
+	  		else
+	  			$a = 1;
+	  		
+			for ($x = 1; $x <= 4; $x++){
+				if ($_SESSION['VALID'][$x] == 0)
+					continue;
+				if ($_SESSION['JAWABAN'][$x] == $a)
+					$_SESSION['VALID'][$x] = 0;
+				else{
+					$jaw = $x-1;
+					$GLOBALS['sum']++;
+				}
 			}
-		}
-  	}
+	  	}
+	}
 
-	if ($sum == 1){
+	if ($GLOBALS['sum'] == 1){
 		echo $jaw;
-		session_unset();
-		session_destroy();
-		echo "<a href='test.php'>Restart</a>";
+		echo '<script>$("#tombol").hide();</script>';
 	}
 	else{
 		$soal = 0;
