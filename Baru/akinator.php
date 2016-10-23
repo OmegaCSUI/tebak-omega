@@ -51,6 +51,7 @@
 	if ($GLOBALS['sum'] == 1){
 		echo $jaw;
 		echo '<script>$("#tombol").hide();</script>';
+		echo '<script>$("button#3").show();</script>';
 	}
 	else{
 		$ya = 0;
