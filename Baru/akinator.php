@@ -46,15 +46,29 @@
 					$_SESSION['VALID'][$x] = 0;
 				else{
 					$jaw = $x;
-					$GLOBALS['sum']++;
 				}
 			}
 	  	}
 	}
 	$ret[0] = array_sum($_SESSION['VALID']);
-	if ($GLOBALS['sum'] == 1){
-		$ret[1] = $jaw;
+	if ($ret[0] == 1){
+		$tbl_name = "data";
+		$link2 = mysqli_connect("$host", "$username", "$password", "$db_name");
+
+		$sql = "SELECT nama,counter FROM $tbl_name WHERE id = $jaw";
+		$result = mysqli_query($link2, $sql);
+		$rows = mysqli_fetch_array($result, MYSQLI_ASSOC);
+		$nama = $rows['nama'];
+		$ret[1] = $nama;
+
 		echo json_encode($ret);
+
+		$tmp = $rows['counter']+1;
+
+		$sql = "UPDATE data SET counter=$tmp WHERE id=$jaw";
+		$result = mysqli_query($link2, $sql);
+		mysqli_close($link2);
+
 	}
 	else{
 		$ok = 0;
@@ -78,4 +92,5 @@
 		echo json_encode($ret);
 		$_SESSION['JAWABAN'] = $rows;
 	}
+	mysqli_close($link);
 ?>

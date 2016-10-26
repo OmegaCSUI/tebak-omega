@@ -23,6 +23,7 @@ $(document).ready(function(){
             document.getElementById("tanya").innerHTML = x[1];
 
             if (x[0] == 1){
+                $("#leader").load("leaderboard.php");
                 $('#tombol').hide();
                 $('button#9').show();
             }
@@ -35,6 +36,7 @@ $(document).ready(function(){
             document.getElementById("tanya").innerHTML = x[1];
 
             if (x[0] == 1){
+                $("#leader").load("leaderboard.php");
                 $('#tombol').hide();
                 $('button#9').show();
             }
@@ -47,6 +49,7 @@ $(document).ready(function(){
             document.getElementById("tanya").innerHTML = x[1];
 
             if (x[0] == 1){
+                $("#leader").load("leaderboard.php");
                 $('#tombol').hide();
                 $('button#9').show();
             }
@@ -75,5 +78,6 @@ $(document).ready(function(){
 	</div>
 	<button id="9">Restart</button>
 </div>
+<div id="leader"></div>
 </body>
 </html>
