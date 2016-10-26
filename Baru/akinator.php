@@ -3,6 +3,7 @@
 
 	$N = 8;
 	$M = 6;
+	$ret = array(0,0);
 	$GLOBALS['sum'] = 0;
 	$jaw = 0;
 
@@ -13,11 +14,11 @@
 	$tbl_name = "pertanyaan";
 	$link = mysqli_connect("$host", "$username", "$password", "$db_name");
 
-  	if (isset($_GET['ya'])){
-  		if ($_GET['ya'] == 9){
+  	if (isset($_GET['command'])){
+  		if ($_GET['command'] == 9){
 			session_unset();
 			// session_destroy();
-			$orang = array_fill(0, $N+5, 1);
+			$orang = array_fill(0, $N+1, 1);
 			$quest = array_fill(0, $M, 1);
 			for ($i = 0; $i < $M; $i++) $quest[$i] = $i+1;
 			shuffle($quest);
@@ -25,11 +26,14 @@
 			$orang[0] = 0;
 
 			$_SESSION['VALID'] = $orang;
-			$_SESSION['LALALA'] = $quest;
+			$_SESSION['TANYA'] = $quest;
 			$_SESSION['IDX'] = 0;
   		}
+  		else if ($_GET['command'] == 2){
+  			array_push($_SESSION['TANYA'], $_SESSION['TANYA'][$_SESSION['IDX']-1]);
+  		}
   		else{
-	  		if ($_GET['ya'] == 1)
+	  		if ($_GET['command'] == 1)
 	  			$a = 0;
 	  		
 	  		else
@@ -47,16 +51,15 @@
 			}
 	  	}
 	}
-
+	$ret[0] = array_sum($_SESSION['VALID']);
 	if ($GLOBALS['sum'] == 1){
-		echo $jaw;
-		echo '<script>$("#tombol").hide();</script>';
-		echo '<script>$("button#3").show();</script>';
+		$ret[1] = $jaw;
+		echo json_encode($ret);
 	}
 	else{
-		$ya = 0;
-		while($ya == 0){
-			$soal = $_SESSION['LALALA'][$_SESSION['IDX']];
+		$ok = 0;
+		while($ok == 0){
+			$soal = $_SESSION['TANYA'][$_SESSION['IDX']];
 			$_SESSION['IDX']++;
 			$sql = "SELECT * FROM $tbl_name WHERE id = $soal";
 			$result = mysqli_query($link, $sql);
@@ -68,11 +71,11 @@
 				}
 			}
 			if($tot != array_sum($_SESSION['VALID']) && $tot != 0){
-				$ya = 1;
+				$ok = 1;
 			}
 		}
-		echo $rows['tanya'];
-		echo "<br>";
+		$ret[1] = $rows['tanya'];
+		echo json_encode($ret);
 		$_SESSION['JAWABAN'] = $rows;
 	}
 ?>

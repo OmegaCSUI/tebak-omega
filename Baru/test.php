@@ -6,27 +6,62 @@
 $(document).ready(function(){
 
 	$('#main').hide();
-	$('#tanya').load('akinator.php?ya=9');
 
 	$("button#0").click(function(){
+        $.getJSON('akinator.php?command=9', function(data) {
+            x = data;
+            document.getElementById("tanya").innerHTML = x[1];
+        });
         $("#main").show();
         $('button#0').hide();
-        $('button#3').hide();
+        $('button#9').hide();
     });
 
-	$("button#1").click(function(){
-        $("#tanya").load("akinator.php?ya=1");
+    $("button#1").click(function(){
+        $.getJSON('akinator.php?command=1', function(data) {
+            x = data;
+            document.getElementById("tanya").innerHTML = x[1];
+
+            if (x[0] == 1){
+                $('#tombol').hide();
+                $('button#9').show();
+            }
+        });
     });
 
     $("button#2").click(function(){
-        $("#tanya").load("akinator.php?ya=0");
+        $.getJSON('akinator.php?command=0', function(data) {
+            x = data;
+            document.getElementById("tanya").innerHTML = x[1];
+
+            if (x[0] == 1){
+                $('#tombol').hide();
+                $('button#9').show();
+            }
+        });
     });
 
     $("button#3").click(function(){
-        $('#tanya').load('akinator.php?ya=9');
-        $('#tombol').show();
-        $('button#3').hide();
+        $.getJSON('akinator.php?command=2', function(data) {
+            x = data;
+            document.getElementById("tanya").innerHTML = x[1];
+
+            if (x[0] == 1){
+                $('#tombol').hide();
+                $('button#9').show();
+            }
+        });
     });
+
+    $("button#9").click(function(){
+        $.getJSON('akinator.php?command=9', function(data) {
+            x = data;
+            document.getElementById("tanya").innerHTML = x[1];
+        });
+        $('#tombol').show();
+        $('button#9').hide();
+    });
+
 
 })
 </script>
@@ -36,8 +71,9 @@ $(document).ready(function(){
 	<div id="tombol">
 		<button id="1">YA</button>
 		<button id="2">TIDAK</button>
+        <button id="3">GA TAU</button>
 	</div>
-	<button id="3">Restart</button>
+	<button id="9">Restart</button>
 </div>
 </body>
 </html>
