@@ -4,7 +4,7 @@
 <body>
 <script>
 $(document).ready(function(){
-
+    skor();
 	$('#main').hide();
 
 	$("button#0").click(function(){
@@ -20,13 +20,28 @@ $(document).ready(function(){
 
 })
 
+function skor(){
+    $.getJSON('leaderboard.php', function(data){
+        var arr = data;
+        var cnt = 0;
+        for (x in arr){
+            if (cnt == 5) break;
+            cnt++;
+            var idd = cnt + 'a';
+            document.getElementById(idd).innerHTML = x;
+            idd = cnt + 'b';
+            document.getElementById(idd).innerHTML = arr[x];
+        }
+    });
+}
+
 function jawab(cmd){
     var url = 'akinator.php?command=' + cmd;
     $.getJSON(url, function(data) {
         var x = data;
         document.getElementById("tanya").innerHTML = x[1];
         if (x[0] == 1){
-            $("#leader").load("leaderboard.php");
+            skor();
             $('#tombol').hide();
             $('button#9').show();
         }
@@ -48,6 +63,14 @@ function jawab(cmd){
 	</div>
 	<button id="9" onclick="jawab(9)">Restart</button>
 </div>
-<div id="leader"></div>
+<div id="leader">
+    <table>
+        <tr><td id="1a"></td><td id="1b"></td></tr>
+        <tr><td id="2a"></td><td id="2b"></td></tr>
+        <tr><td id="3a"></td><td id="3b"></td></tr>
+        <tr><td id="4a"></td><td id="4b"></td></tr>
+        <tr><td id="5a"></td><td id="5b"></td></tr>
+    </table>
+</div>
 </body>
 </html>

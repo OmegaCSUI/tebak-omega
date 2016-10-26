@@ -16,9 +16,5 @@
 	}
 
 	arsort($arr);
-	$cnt = 0;
-	foreach($arr as $x => $value){
-		echo $x . "  ->  " . $value;
-		echo "<br>";
-	}
+	echo json_encode($arr);
 ?>
