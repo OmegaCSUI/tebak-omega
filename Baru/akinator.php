@@ -7,10 +7,10 @@
 	$GLOBALS['sum'] = 0;
 	$jaw = 0;
 
-	$host = "localhost";
+    $host = "localhost";
 	$username = "apakaden";
 	$password = "apakaden";
-	$db_name = "learnphp";
+	$db_name = "anakomeg_games";
 	$tbl_name = "pertanyaan";
 	$link = mysqli_connect("$host", "$username", "$password", "$db_name");
 
