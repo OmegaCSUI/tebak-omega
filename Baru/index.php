@@ -1,13 +1,14 @@
+<?php
+  session_start();
+  require_once "includes/php/environment.php";
+  require_once "includes/php/portal.php";
+
+  portal_init();
+  $logged_in = portal_is_logged_in();
+?>
 <!DOCTYPE html>
 <html lang="en">
   
-  <?php
-    require_once "includes/php/environment.php";
-    require_once "includes/php/portal.php";
-
-    portal_init();
-    $logged_in = portal_is_logged_in();
-  ?>
 
   <head>
     <meta charset="utf-8">
