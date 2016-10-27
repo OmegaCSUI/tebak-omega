@@ -2,7 +2,7 @@
 	$host = "localhost";
 	$username = "apakaden";
 	$password = "apakaden";
-	$db_name = "learnphp";
+	$db_name = "anakomeg_games";
 	$tbl_name = "data";
 
 	$link = mysqli_connect("$host", "$username", "$password", "$db_name");
