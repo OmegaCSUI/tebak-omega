@@ -2,8 +2,8 @@
 	$host = "localhost";
 	$username = "apakaden";
 	$password = "apakaden";
-	$db_name = "anakomeg_games";
-	$tbl_name = "data";
+	$db_name = "learnphp";
+	$tbl_name = "dataz";
 
 	$link = mysqli_connect("$host", "$username", "$password", "$db_name");
 	$sql = "SELECT * FROM $tbl_name";
@@ -12,7 +12,7 @@
 	$arr = array();
 
 	while($rows = mysqli_fetch_array($result,MYSQLI_ASSOC)){
-		$arr[$rows['nama']] = $rows['counter'];
+		$arr[$rows['Nama']] = $rows['counter'];
 	}
 
 	arsort($arr);
