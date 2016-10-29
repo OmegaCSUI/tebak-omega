@@ -1,39 +1,50 @@
 <?php
 	session_start();
 
-	$N = 8;
-	$M = 6;
+	$N = 353;  //Banyak Orang
+	$M = 50;   //Banyak Pertanyaan
 	$ret = array(0,0);
-	$GLOBALS['sum'] = 0;
 	$jaw = 0;
 
     $host = "localhost";
 	$username = "apakaden";
 	$password = "apakaden";
-	$db_name = "anakomeg_games";
-	$tbl_name = "pertanyaan";
+	$db_name = "learnphp";
+	$tbl_name = "pertanyaanz";
 	$link = mysqli_connect("$host", "$username", "$password", "$db_name");
 
   	if (isset($_GET['command'])){
   		if ($_GET['command'] == 9){
 			session_unset();
 			// session_destroy();
-			$orang = array_fill(0, $N+1, 1);
+			$orang = array_fill(0, $N+1, 0);
 			$quest = array_fill(0, $M, 1);
 			for ($i = 0; $i < $M; $i++) $quest[$i] = $i+1;
 			shuffle($quest);
 
 			$orang[0] = 0;
 
+			// Siapa aja yang udah isi data
+			$tbl_name2 = "dataz";
+			$link2 = mysqli_connect("$host", "$username", "$password", "$db_name");
+
+			$sql = "SELECT id FROM $tbl_name2";
+			$result = mysqli_query($link2, $sql);
+			while($rows = mysqli_fetch_array($result,MYSQLI_ASSOC)){
+				$orang[$rows['id']] = 1;
+			}
+
 			$_SESSION['VALID'] = $orang;
 			$_SESSION['TANYA'] = $quest;
 			$_SESSION['IDX'] = 0;
+			mysqli_close($link2);
+
   		}
   		else if ($_GET['command'] == 2){
   			array_push($_SESSION['TANYA'], $_SESSION['TANYA'][$_SESSION['IDX']-1]);
   		}
   		else{
-	  		if ($_GET['command'] == 1)
+	  		if ($_GET['command'] == 1)  //1 untuk Ya 0 untuk tidak
 	  			$a = 0;
 	  		
 	  		else
@@ -52,20 +63,22 @@
 	}
 	$ret[0] = array_sum($_SESSION['VALID']);
 	if ($ret[0] == 1){
-		$tbl_name = "data";
+		//Update Leaderboard
+
+		$tbl_name2 = "dataz";
 		$link2 = mysqli_connect("$host", "$username", "$password", "$db_name");
 
-		$sql = "SELECT nama,counter FROM $tbl_name WHERE id = $jaw";
+		$sql = "SELECT Nama,counter FROM $tbl_name2 WHERE id = $jaw";
 		$result = mysqli_query($link2, $sql);
 		$rows = mysqli_fetch_array($result, MYSQLI_ASSOC);
-		$nama = $rows['nama'];
+		$nama = $rows['Nama'];
 		$ret[1] = $nama;
 
 		echo json_encode($ret);
 
 		$tmp = $rows['counter']+1;
 
-		$sql = "UPDATE data SET counter=$tmp WHERE id=$jaw";
+		$sql = "UPDATE dataz SET counter=$tmp WHERE id=$jaw";
 		$result = mysqli_query($link2, $sql);
 		mysqli_close($link2);
 
