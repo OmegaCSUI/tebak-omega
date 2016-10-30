@@ -60,9 +60,9 @@
         </div>
         <?php
           if($logged_in){
-              echo '<p><a class="btn btn-lg btn-success btn-block" role="button" id="0">Play</a></p>';
+              echo '<p><a class="btn btn-lg btn-success btn-block" role="button" id="0">Play</a></p>'.PHP_EOL;
           }else{
-              echo '<p><a class="btn btn-lg btn-danger btn-block disabled" role="button" id="0">You need to log in first</a></p>';
+              echo '<p><a class="btn btn-lg btn-danger btn-block disabled" role="button">You need to log in first</a></p>'.PHP_EOL;
           }
         ?>
         <div id="main">
@@ -94,13 +94,13 @@
               <?php
                 if($logged_in){
                     $user = portal_get_sso_info();
-                    echo '<p>Halo '.$user->name.'!</p>';
-                    echo '<br>';
-                    echo '<p><a href="logout.php" class="btn btn-lg btn-danger btn-block">Logout</a></p>';
+                    echo '<p>Halo '.$user->name.'!</p>'.PHP_EOL;
+                    echo '<br>'.PHP_EOL;
+                    echo '<p><a href="logout.php" class="btn btn-lg btn-danger btn-block">Logout</a></p>'.PHP_EOL;
                 }else{
-                    echo '<p>Halo Guest!</p>';
-                    echo '<br>';
-                    echo '<p><a href="auth.php" class="btn btn-lg btn-success btn-block">Login SSO</a></p>';
+                    echo '<p>Halo Guest!</p>'.PHP_EOL;
+                    echo '<br>'.PHP_EOL;
+                    echo '<p><a href="auth.php" class="btn btn-lg btn-success btn-block">Login SSO</a></p>'.PHP_EOL;
                 }
               ?>
               <p><a href="http://anak-omega.com/wiki" class="btn btn-lg btn-info btn-block" role="button">Wiki</a></p>
