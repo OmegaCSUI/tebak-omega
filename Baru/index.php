@@ -5,6 +5,10 @@
 
     portal_init();
     $logged_in = portal_is_logged_in();
+    if ($logged_in) {
+      $_SESSION['logged_in']=1;
+      // header("location: http://localhost/includes/php/akinator.php?command=1");
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">

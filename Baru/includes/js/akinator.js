@@ -2,10 +2,11 @@ $(document).ready(function(){
     skor();
     $('#main').hide();
     $(".btn#0").click(function(){
-        var url = 'includes/php/akinator.php?command=9';
-        $.getJSON(url, function(data) {
-            x = data;
-            document.getElementById("soal").innerHTML = x[1];
+        var url = 'includes/php/akinator.php?command=9';        
+
+        $.getJSON(url, function(data) {            
+            if (data[0] != "") return;
+            document.getElementById("soal").innerHTML = data[2];
         });
         $("#main").show();
         $('#init').hide();
@@ -37,9 +38,11 @@ function skor(){
 function jawab(cmd){
     var url = 'includes/php/akinator.php?command=' + cmd;
     $.getJSON(url, function(data) {
+        alert(data[0]);
         var x = data;
-        document.getElementById("soal").innerHTML = x[1];
-        if (x[0] == 1){
+        if (x[0] != "") return;
+        document.getElementById("soal").innerHTML = x[2];
+        if (x[1] == 1){
             skor();
             $('#tombol').hide();
             $('.btn#9').show();
