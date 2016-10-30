@@ -38,7 +38,7 @@
     <script src="includes/js/jquery.min.js"></script>
 
     <!-- Game core JS -->
-    <script src="includes/js/akinator.js" type="text/javascript"></script>
+    <script src="includes/js/akinator.v2.js" type="text/javascript"></script>
 
   </head>
 
