@@ -1,15 +1,13 @@
+<?php session_start(); ?>
 <?php
-  session_start();
-  require_once "includes/php/environment.php";
-  require_once "includes/php/portal.php";
+    require_once "includes/php/environment.php";
+    require_once "includes/php/portal.php";
 
-  portal_init();
-  $logged_in = portal_is_logged_in();
+    portal_init();
+    $logged_in = portal_is_logged_in();
 ?>
 <!DOCTYPE html>
 <html lang="en">
-  
-
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,7 +15,7 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="favicon.ico">
+    <link rel="icon" href="includes/images/favicon.ico">
 
     <title>Tebak Omega!</title>
 
@@ -53,10 +51,11 @@
       <div class="jumbotron">
         <div class="play-init" id="init">
           <h1>Tebak Omega!</h1>
+          <br>
           <p class="lead">
           Pikirin satu orang di kepala kamu. 
           <br>Terus jawab YA atau TIDAK berdasarkan ciri-ciri orang itu. 
-          <br>Nanti kita bakal ketebak siapa yang kamu pikirin.
+          <br>Nanti kita bakal tebak siapa yang kamu pikirin.
           </p>
         </div>
         <?php
@@ -120,8 +119,8 @@
               <table class="table">
                 <thead>
                   <tr>
-                    <th>Nama</th>
-                    <th class="text-center">Berapa kali ditebak</th>
+                    <th>Paling sering ditebak</th>
+                    <th class="text-center">#</th>
                   </tr>
                 </thead>
                 <tbody>

@@ -91,10 +91,5 @@ body {
 /* Customize panel body's height*/
 .panel-height {
   position: relative;
-  height: 250px;
-}
-
-.bawah {
-  position: absolute;
-  bottom: 0;
+  min-height: 250px;
 }
