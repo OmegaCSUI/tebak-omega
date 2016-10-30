@@ -1,15 +1,20 @@
-<?php session_start(); ?>
-<?php
-    require_once "includes/php/environment.php";
-    require_once "includes/php/portal.php";
+<?php   
+  require_once "includes/php/sso.php";
+  require_once "includes/php/environment.php";
 
-    portal_init();
-    $logged_in = portal_is_logged_in();
-    if ($logged_in) {
-      $_SESSION['logged_in']=1;
-      // header("location: http://localhost/includes/php/akinator.php?command=1");
+  session_start();
+
+  sso_init();
+  $logged_in = sso_is_logged_in();
+  if ($logged_in)
+    if (sso_is_authorized()) {
+      $_SESSION['logged_in']=1;            
+      // header("location: includes/php/akinator.php");
     }
+    else
+      show_msg("unauthorized access. hanya untuk omega 2016, fakultas elit dan nomor 1 ui");
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -64,7 +69,7 @@
         </div>
         <?php
           if($logged_in){
-              echo '<p><a class="btn btn-lg btn-success btn-block" role="button" id="0">Play</a></p>'.PHP_EOL;
+              echo '<p><a class="btn btn-lg btn-success btn-block" role="button" id="0">Play</a></p>'.PHP_EOL;              
           }else{
               echo '<p><a class="btn btn-lg btn-danger btn-block disabled" role="button">You need to log in first</a></p>'.PHP_EOL;
           }
@@ -97,7 +102,8 @@
             <div class="panel-body panel-height">
               <?php
                 if($logged_in){
-                    $user = portal_get_sso_info();
+
+                    $user = sso_get_info();
                     echo '<p>Halo '.$user->name.'!</p>'.PHP_EOL;
                     echo '<br>'.PHP_EOL;
                     echo '<p><a href="logout.php" class="btn btn-lg btn-danger btn-block">Logout</a></p>'.PHP_EOL;
