@@ -9,7 +9,7 @@
   if ($logged_in)
     if (sso_is_authorized()) {
       $_SESSION['logged_in']=1;            
-      // header("location: includes/php/akinator.php");
+      // header("location: includes/php/leaderboard.php");
     }
     else
       show_msg("unauthorized access. hanya untuk omega 2016, fakultas elit dan nomor 1 ui");
@@ -153,6 +153,6 @@
 
     </div> <!-- /container -->
 
-
+  <a href = "includes/php/protes.php?harusnya=238"> Protes </a>
   </body>
 </html>
