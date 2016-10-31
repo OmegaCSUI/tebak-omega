@@ -1,6 +1,8 @@
 $(document).ready(function(){
     skor();
+
     $('#main').hide();
+
     $(".btn#0").click(function(){
         var url = 'includes/php/akinator.php?command=9';                
         $.getJSON(url, function(data) {            
@@ -12,7 +14,7 @@ $(document).ready(function(){
         $('.btn#0').hide();
         $('.btn#8').hide();
         $('.btn#9').hide();
-
+        $('#formulir').hide();
     });
 
     $('#default').lavalamp({
@@ -56,12 +58,17 @@ $(document).ready(function(){
     });
 
     $( ".select2-single" ).select2({
-        placeholder: "test",
+        placeholder: "Emang kamu mikirin siapa?",
         theme: "bootstrap",
         maximumSelectionSize: 6,
         display: "block",
         width: "100%"
     });
+
+    $('#nama-select').change(function(){
+      protes($("#nama-select").val());
+    });
+
 });
 
 function tolol(){
@@ -93,8 +100,24 @@ function jawab(cmd){
         }
     });
     if (cmd == 9){
+        $('#soal').show();
         $('#tombol').show();
         $('.btn#8').hide();
         $('.btn#9').hide();
+        $('#formulir').hide();
+        $('#hasil').hide();
+
+        $("#nama-select").val("").trigger('change');
     }
+}
+
+function pindah(){
+  $('.btn#8').hide();
+  $('#soal').hide();
+  $('#formulir').show();
+  $('#hasil').show();
+}
+
+function protes(cmd){
+  $( "#hasil" ).load( "includes/php/protes.php?harusnya=" + cmd);
 }

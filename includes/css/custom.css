@@ -109,11 +109,6 @@ img {
   border-radius: 6px;
 }
 
-.modal-body {
-  position: relative;
-}
-
-.width-full {
-  display: block;
-  width: 100%;
+.bawah {
+  bottom: 0;
 }

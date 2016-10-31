@@ -88,7 +88,29 @@
           }
         ?>
         <div id="main">
-          <p><h1 class="content" id="soal"></h1></p>
+		  <div class="content">
+          	<p><form action="includes/php/protes.php" method="get" id="formulir">
+				<select class="form-control input-lg select2-single" id="nama-select" name="harusnya">
+					<option></option>
+					<?php
+					$host     = $GLOBALS['db_host'];
+				    $username = $GLOBALS['db_username'];
+				    $password = $GLOBALS['db_password'];
+				    $db_name  = $GLOBALS['db_name'];
+					$tbl_name = "dataz";
+
+					$link = mysqli_connect("$host", "$username", "$password", "$db_name");
+					$sql = "SELECT id, Nama FROM $tbl_name ORDER BY `id`";
+					$result = mysqli_query($link, $sql);
+					
+					while ($rows = mysqli_fetch_array($result,MYSQLI_ASSOC))
+						echo "<option value='".$rows['id']."'>".$rows['Nama']."</option>"
+					?>        
+				</select>
+			</form> </p>
+			<table class="table text-left" id="hasil"></table>
+          	<p><h1 id="soal"></h1></p>
+          </div>
           <div class="container" id="tombol">
             <div class="row">
               <div class="col-lg-4">
@@ -102,8 +124,8 @@
               </div>
             </div>
           </div>
-          <p><a class="btn btn-lg btn-warning btn-block" role="button" data-toggle="modal" data-target="#myModal" id="8">Bukan ini kocak</a></p>
-          <p><a class="btn btn-lg btn-success btn-block" role="button" id="9" onclick="jawab(9)">Play Again</a></p>
+          <p><a class="btn btn-lg btn-warning btn-block" role="button" id="8" onclick="pindah()">Bukan ini kocak</a></p>
+          <p><a class="btn btn-lg btn-success btn-block bawah" role="button" id="9" onclick="jawab(9)">Play Again</a></p>
         </div>
       </div>
       <div class="row marketing">
@@ -161,10 +183,9 @@
       </div>
 
       <footer class="footer">
-        <p>&copy; <a href="#" data-toggle="modal" data-target="#myModal">Omega 2016.</a></p>
+        <p>&copy; Omega 2016<a href="#" data-toggle="modal" data-target="#myModal">.</a></p>
       </footer>
 
-      <!-- Protes Modal -->
       <div id="myModal" class="modal fade" role="dialog">
       <div class="modal-dialog">
 
@@ -175,17 +196,7 @@
             <h4 class="modal-title">Modal Header</h4>
           </div>
           <div class="modal-body select2-wrapper">
-
-			<select class="form-control input-lg select2-single">
-				<option></option>
-				<optgroup label="Pacific Time Zone">
-					<option value="CA">California</option>
-					<option value="NV">Nevada</option>
-					<option value="OR">Oregon</option>
-					<option value="WA">Washington</option>
-				</optgroup>
-			</select>
-			
+          	<h4>Ini easter egg</h4>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -195,7 +206,6 @@
         </div>
       </div>
     </div> <!-- /container -->
-  <a href = "includes/php/protes.php?harusnya=238"> Protes </a>
   </body>
 </html>
 
