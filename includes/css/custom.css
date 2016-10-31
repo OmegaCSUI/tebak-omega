@@ -4,6 +4,10 @@ body {
   padding-bottom: 20px;
 }
 
+img {
+  margin:25px;
+}
+
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
 .marketing,
@@ -91,5 +95,25 @@ body {
 /* Customize panel body's height*/
 .panel-height {
   position: relative;
-  min-height: 250px;
+  min-height: 272px;
+}
+
+.nav > li > a:hover,
+.nav > li > a:focus {
+  text-decoration: none;
+  background-color: transparent;
+}
+
+.lavalamp-object {
+  background-color: #E9E9E9;
+  border-radius: 6px;
+}
+
+.modal-body {
+  position: relative;
+}
+
+.width-full {
+  display: block;
+  width: 100%;
 }

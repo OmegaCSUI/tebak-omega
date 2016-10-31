@@ -8,8 +8,7 @@
   $logged_in = sso_is_logged_in();
   if ($logged_in)
     if (sso_is_authorized()) {
-      $_SESSION['logged_in']=1;            
-      // header("location: includes/php/akinator.php");
+      $_SESSION['logged_in']=1;
     }
     else
       show_msg("unauthorized access. hanya untuk omega 2016, fakultas elit dan nomor 1 ui");
@@ -18,10 +17,12 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="includes/images/favicon.ico">
@@ -37,29 +38,41 @@
     <!-- JQuery core JS -->
     <script src="includes/js/jquery.min.js"></script>
 
+    <!-- Bootstrap core JS -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
     <!-- Game core JS -->
     <script src="includes/js/akinator.v2.js" type="text/javascript"></script>
 
+    <!-- LavaLamp -->
+    <script type="text/javascript" src="includes/js/jquery.lavalamp.min.js"></script>
+    <link type="text/css" href="includes/css/jquery.lavalamp.css" rel="stylesheet" media="screen" />
+
+    <!-- Select2 -->
+    <link rel="stylesheet" href="includes/css/select2.css">
+    <link rel="stylesheet" href="includes/css/select2-bootstrap.css">
+    <script src="includes/js/select2.min.js"></script>
+  
   </head>
 
   <body>
-
     <div class="container">
-      <!-- Kita gabutuh navbar kan -->
-      <!-- <div class="header clearfix">
+      <div class="header clearfix">
         <nav>
-          <ul class="nav nav-pills pull-right">
-            <li role="presentation" class="active"><a href="#">Home</a></li>
-            <li role="presentation"><a href="#">About</a></li>
-            <li role="presentation"><a href="#">Contact</a></li>
+          <ul class="nav nav-pills pull-right fata" id="setonclick">
+            <li role="presentation" id="home"><a href="#">Home</a></li>
+            <li role="presentation" id="contact"><a href="#">About</a></li>
+            <li role="presentation" id="about"><a href="http://anak-omega.com/wiki">Wiki</a></li>
+            <li role="presentation" id="contact"><a href="http://anak-omega.com/blog">Blog</a></li>
+            <li role="presentation" id="contact"><a style="color:red" href="logout.php">Logout</a></li>
           </ul>
         </nav>
-        <h3 class="text-muted">Project name</h3>
-      </div> -->
+        <h3 class="text-muted">Tebak Omega!</h3>
+      </div>
 
       <div class="jumbotron">
         <div class="play-init" id="init">
-          <h1>Tebak Omega!</h1>
+          <h1>How to Play:</h1>
           <br>
           <p class="lead">
           Pikirin satu orang di kepala kamu. 
@@ -89,10 +102,10 @@
               </div>
             </div>
           </div>
-          <p><a class="btn btn-lg btn-success btn-block" role="button" id="9" onclick="jawab(9)">Restart</a></p>
+          <p><a class="btn btn-lg btn-warning btn-block" role="button" data-toggle="modal" data-target="#myModal" id="8">Bukan ini kocak</a></p>
+          <p><a class="btn btn-lg btn-success btn-block" role="button" id="9" onclick="jawab(9)">Play Again</a></p>
         </div>
       </div>
-
       <div class="row marketing">
         <div class="col-lg-6">
           <div class="panel panel-default">
@@ -148,11 +161,44 @@
       </div>
 
       <footer class="footer">
-        <p>&copy; Omega 2016</p>
+        <p>&copy; Omega 2016<a href="#" data-toggle="modal" data-target="#myModal">.</a></p>
       </footer>
 
+      <!-- Protes Modal -->
+      <div id="myModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Modal Header</h4>
+          </div>
+          <div class="modal-body">
+            <script type="text/javascript">
+            $(document).ready(function() {
+              $(".select2-bootstrap").select2({
+                  theme: "bootstrap"
+              });
+            });
+            </script>
+
+            <select class="select2-choice select2-default width-full">
+              <option value="AL">Alabama</option>
+              <option value="WY">Wyoming</option>
+            </select>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+
+        </div>
+      </div>
     </div> <!-- /container -->
 
 
   </body>
 </html>
+
+<!-- pending credits: lavalamp, jumbotron -->
