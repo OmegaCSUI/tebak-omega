@@ -55,6 +55,13 @@ $(document).ready(function(){
       deepFocus: true
     });
 
+    $( ".select2-single" ).select2({
+        placeholder: "test",
+        theme: "bootstrap",
+        maximumSelectionSize: 6,
+        display: "block",
+        width: "100%"
+    });
 });
 
 function tolol(){

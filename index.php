@@ -41,9 +41,6 @@
     <!-- Bootstrap core JS -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    <!-- Game core JS -->
-    <script src="includes/js/akinator.v2.js" type="text/javascript"></script>
-
     <!-- LavaLamp -->
     <script type="text/javascript" src="includes/js/jquery.lavalamp.min.js"></script>
     <link type="text/css" href="includes/css/jquery.lavalamp.css" rel="stylesheet" media="screen" />
@@ -51,8 +48,11 @@
     <!-- Select2 -->
     <link rel="stylesheet" href="includes/css/select2.css">
     <link rel="stylesheet" href="includes/css/select2-bootstrap.css">
-    <script src="includes/js/select2.min.js"></script>
+    <script src="includes/js/select2.full.js"></script>
   
+    <!-- Game core JS -->
+    <script src="includes/js/akinator.v2.js" type="text/javascript"></script>
+
   </head>
 
   <body>
@@ -161,7 +161,7 @@
       </div>
 
       <footer class="footer">
-        <p>&copy; Omega 2016<a href="#" data-toggle="modal" data-target="#myModal">.</a></p>
+        <p>&copy; <a href="#" data-toggle="modal" data-target="#myModal">Omega 2016.</a></p>
       </footer>
 
       <!-- Protes Modal -->
@@ -174,19 +174,18 @@
             <button type="button" class="close" data-dismiss="modal">&times;</button>
             <h4 class="modal-title">Modal Header</h4>
           </div>
-          <div class="modal-body">
-            <script type="text/javascript">
-            $(document).ready(function() {
-              $(".select2-bootstrap").select2({
-                  theme: "bootstrap"
-              });
-            });
-            </script>
+          <div class="modal-body select2-wrapper">
 
-            <select class="select2-choice select2-default width-full">
-              <option value="AL">Alabama</option>
-              <option value="WY">Wyoming</option>
-            </select>
+			<select class="form-control input-lg select2-single">
+				<option></option>
+				<optgroup label="Pacific Time Zone">
+					<option value="CA">California</option>
+					<option value="NV">Nevada</option>
+					<option value="OR">Oregon</option>
+					<option value="WA">Washington</option>
+				</optgroup>
+			</select>
+			
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -196,7 +195,6 @@
         </div>
       </div>
     </div> <!-- /container -->
-
   <a href = "includes/php/protes.php?harusnya=238"> Protes </a>
   </body>
 </html>
