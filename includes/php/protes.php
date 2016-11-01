@@ -23,7 +23,11 @@
 
         $rows = mysqli_fetch_array($result,MYSQLI_ASSOC);
         if ($rows[$_SESSION['ORANG']] != $rows[$_GET['harusnya']]){
-            echo "<tr><td>".$rows['tanya'] . "</td><td>" . $rows[$_SESSION['ORANG']] . "</td><td>" . $rows[$_GET['harusnya']] . "</td></tr>";
+        	if($rows[$_SESSION['ORANG']] == 1) $orang = "YA";
+        	else $orang = "TIDAK";
+        	if($rows[$_GET['harusnya']] == 1) $harusnya = "YA";
+        	else $harusnya = "TIDAK";
+            echo "<tr><td>".$rows['tanya'] . "</td><td>" . $orang . "</td><td>" . $harusnya . "</td></tr>";
         }
     }
     echo "</tbody>";
