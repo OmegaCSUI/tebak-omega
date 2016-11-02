@@ -4,5 +4,5 @@
 
 	sso_init();
 	sso_login();
-	header("Location: ".$GLOBALS['base_url']);
+	header("Location: ".$GLOBALS['base_url']."/games");
 ?>
