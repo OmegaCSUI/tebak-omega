@@ -11,13 +11,12 @@
     $N = 353;  //Banyak Orang
     $M = 50;   //Banyak Pertanyaan
     $returnValue = array("", 0,0);
-    $jaw = 0;
+    $jawaban = 0;
 
     $host     = $GLOBALS['db_host'];
     $username = $GLOBALS['db_username'];
     $password = $GLOBALS['db_password'];
     $db_name  = $GLOBALS['db_name'];
-    $tbl_name = "pertanyaanz";
 
     $link = mysqli_connect("$host", "$username", "$password", "$db_name");
 
@@ -36,22 +35,19 @@
         $orang[0] = 0;
 
         // Siapa aja yang udah isi data
-        $tbl_name2 = "dataz";
-        $link2 = mysqli_connect("$host", "$username", "$password", "$db_name");
+        $sql = "SELECT id FROM dataz";
+        $result = mysqli_query($link, $sql);
+        if (!$result) show_msg("Gagal query data");
 
-        $sql = "SELECT id FROM $tbl_name2";
-        $result = mysqli_query($link2, $sql);
-
-        while($rows = mysqli_fetch_array($result,MYSQLI_ASSOC)){
+        while($rows = mysqli_fetch_array($result,MYSQLI_ASSOC))
             $orang[$rows['id']] = 1;
-        }
+        
 
         $_SESSION['VALID'] = $orang;
         $_SESSION['TANYA'] = $quest;
         $_SESSION['IDX'] = 0;
         $_SESSION['HISTORY'] = array();
-        $_SESSION['ORANG'] = '';  //Orang yang ditebak siapa
-        mysqli_close($link2);
+        $_SESSION['ORANG'] = 0;  //Orang yang ditebak siapa
 
     }
     else if ($_GET['command'] == 2){
@@ -67,53 +63,53 @@
             if ($_SESSION['JAWABAN'][$x] == $a)
                 $_SESSION['VALID'][$x] = 0;
             else
-                $jaw = $x;            
+                $jawaban = $x;            
         }
     }
-    
 
     $returnValue[1] = array_sum($_SESSION['VALID']);
-    if ($returnValue[1] == 1){
-        //Update Leaderboard
 
-        $tbl_name2 = "dataz";
-        $link2 = mysqli_connect("$host", "$username", "$password", "$db_name");
+    if ($returnValue[1] == 1){ // Kalau udah ketemu jawaban
 
-        $sql = "SELECT Nama,counter FROM $tbl_name2 WHERE id = $jaw";
-        $result = mysqli_query($link2, $sql);
+        $sql = "SELECT Nama,counter FROM dataz WHERE id = $jawaban";
+        $result = mysqli_query($link, $sql);
+        if (!$result) show_msg("Gagal cari nama orang");
+
         $rows = mysqli_fetch_array($result, MYSQLI_ASSOC);
-        $nama = $rows['Nama'];
-        $returnValue[2] = $nama;
-        $_SESSION['ORANG'] = $jaw;
-
-        echo json_encode($returnValue);
+        $returnValue[2] = $rows['Nama'];
+        $_SESSION['ORANG'] = $jawaban;
 
         $tmp = $rows['counter']+1;
 
-        $sql = "UPDATE dataz SET counter=$tmp WHERE id=$jaw";
-        $result = mysqli_query($link2, $sql);
-        mysqli_close($link2);
+        $sql = "UPDATE dataz SET counter=$tmp WHERE id=$jawaban";
+        $result = mysqli_query($link, $sql);
+        if (!$result) show_msg("Gagal update leaderboard");
 
+        echo json_encode($returnValue);
     }
-    else{
+    else if ($returnValue[1] > 1){
         $ok = 0;
         while($ok == 0){    //Ngambil pertanyaan yang valid
             $soal = $_SESSION['TANYA'][$_SESSION['IDX']];
             $_SESSION['IDX']++;
-            $sql = "SELECT * FROM $tbl_name WHERE id = $soal";
+
+            $sql = "SELECT * FROM pertanyaanz WHERE id = $soal";
             $result = mysqli_query($link, $sql);
+            if (!$result) show_msg("Gagal nyari soal");
+
             $rows = mysqli_fetch_array($result,MYSQLI_ASSOC);
             
-            $tot = 0;
+            $total = 0;
 
             for ($i = 1; $i <= $N; $i++)
                 if ($_SESSION['VALID'][$i] == 1)
-                    if ($rows[$i] == 1) $tot++;
+                    if ($rows[$i] == 1) $total++;
                 
-            if($tot != array_sum($_SESSION['VALID']) && $tot != 0)
+            if($total != array_sum($_SESSION['VALID']) && $total != 0)
                 $ok = 1;
             
         }
+
         $returnValue[2] = $rows['tanya'];
         echo json_encode($returnValue);
         $_SESSION['JAWABAN'] = $rows;
