@@ -68,95 +68,97 @@
 
 			<div class="jumbotron">
 
-					<!-- Pas baru buka page -->
-					<div class="play-init" id="init">
-						<div class="content">	
-							<p><h1>Cara Main:</h1></p> <br>
-							<p class="lead">
-							Pikirin satu orang di kepala kamu.<br>
-							Terus jawab YA atau TIDAK berdasarkan ciri-ciri orang itu.<br>
-							Nanti kita bakal tebak siapa yang kamu pikirin.
-							</p>
-						</div>
-						<?php
-							if($logged_in){
-								echo '<p><a class="btn btn-lg btn-success btn-block" role="button" id="mulai">Mulai</a></p>'.PHP_EOL;              
-							}else{
-								echo '<p><a class="btn btn-lg btn-danger btn-block disabled" role="button">Kamu harus login dulu</a></p>'.PHP_EOL;
-							}
-						?>
+				<!-- Pas baru buka page -->
+				<div class="play-init" id="init">
+					<div class="content">	
+						<p><h1>Cara Main:</h1></p> <br>
+						<p class="lead">
+						Pikirin satu orang di kepala kamu.<br>
+						Terus jawab YA atau TIDAK berdasarkan ciri-ciri orang itu.<br>
+						Nanti kita bakal tebak siapa yang kamu pikirin.
+						</p>
 					</div>
+					<?php
+						if($logged_in){
+							echo '<p><a class="btn btn-lg btn-success btn-block" role="button" id="mulai">Mulai</a></p>'.PHP_EOL;              
+						}else{
+							echo '<p><a class="btn btn-lg btn-danger btn-block disabled" role="button">Kamu harus login dulu</a></p>'.PHP_EOL;
+						}
+					?>
+				</div>
 
-					<!-- Buat halaman about -->
-					<div class="container content" id="about" style="display:none">
-						<p><h2>Dibuat oleh mas-mas ganteng ini</h2></p> 
-						<br>
-						<p><h3>Abi</h3></p>
-						<p><h3>Asel</h3></p>
-						<p><h3>Fata</h3></p>
-						<p><h3>Norman</h3></p>
-						<br>
-						<p>Dan terimakasih untuk tim 
-							<a href="https://select2.github.io/">select2</a>, 
-							<a href="http://lavalamp.magicmediamuse.com/">lavalamp</a>, 
-							<a href="https://jquery.com/">jquery</a>, dan 
-							<a href="http://getbootstrap.com/">bootstrap</a> 
-							atas produk gg yang mereka buat</p>
-					</div>
+				<!-- Buat halaman about -->
+				<div class="container content" id="about" style="display:none">
+					<p><h2>Dibuat oleh mas-mas ganteng ini</h2></p> 
+					<br>
+					<p><h3>Abi</h3></p>
+					<p><h3>Asel</h3></p>
+					<p><h3>Fata</h3></p>
+					<p><h3>Norman</h3></p>
+					<br>
+					<p>Dan terimakasih untuk tim 
+						<a href="https://select2.github.io/">select2</a>, 
+						<a href="http://lavalamp.magicmediamuse.com/">lavalamp</a>, 
+						<a href="https://jquery.com/">jquery</a>, dan 
+						<a href="http://getbootstrap.com/">bootstrap</a> 
+						atas produk gg yang mereka buat</p>
+				</div>
 
-					<div id="main">
+				<!-- Animasi Loading -->
+				<!-- <img class="uil-ripple-css" src="includes/images/gears.svg" id="load"> -->
+				<div 
+					style='transform:scale(0.6); margin: auto; display: block; position: absolute; top: -75px; left: 0; bottom: 0; right: 0;'
+					class="uil-ripple-css container" 
+					id="load" 
+				>
+					<div></div>
+					<div></div>
+				</div>
 
-						<!-- Animasi Loading -->
-						<div 
-							style='transform:scale(0.6); margin: auto; display: block; position: absolute; top: -75px; left: 0; bottom: 0; right: 0;'
-							class="uil-ripple-css container" 
-							id="load" 
-						>
-							<div></div>
-							<div></div>
-						</div>
+				<div id="main">
 
-						<div id="hidePasLoadingHueHueHue">
-							<div class="content" id="finished">
 
-								<!-- Buat nampilin select2 -->
-								<p><select class="form-control input-lg select2-single" id="nama-select" name="harusnya">
+					<div id="hidePasLoadingHueHueHue">
+						<div class="content" id="finished">
+
+							<!-- Buat nampilin select2 -->
+							<p><select class="form-control input-lg select2-single" id="nama-select" name="harusnya">
+								
+								<!-- Buat nampilin placeholder -->
+								<option></option>
+								
+								<!-- Buat generate optionnya -->
+								<?php
+									$host     = $GLOBALS['db_host'];
+									$username = $GLOBALS['db_username'];
+									$password = $GLOBALS['db_password'];
+									$db_name  = $GLOBALS['db_name'];
+									$tbl_name = "dataz";
+
+									$link = mysqli_connect("$host", "$username", "$password", "$db_name");
+									$sql = "SELECT id, Nama FROM $tbl_name ORDER BY `id`";
+									$result = mysqli_query($link, $sql);
 									
-									<!-- Buat nampilin placeholder -->
-									<option></option>
-									
-									<!-- Buat generate optionnya -->
-									<?php
-										$host     = $GLOBALS['db_host'];
-										$username = $GLOBALS['db_username'];
-										$password = $GLOBALS['db_password'];
-										$db_name  = $GLOBALS['db_name'];
-										$tbl_name = "dataz";
+									while ($rows = mysqli_fetch_array($result,MYSQLI_ASSOC)){
+										echo "<option value='".$rows['id']."'>".$rows['Nama']."</option>";
+									}
+								?>
 
-										$link = mysqli_connect("$host", "$username", "$password", "$db_name");
-										$sql = "SELECT id, Nama FROM $tbl_name ORDER BY `id`";
-										$result = mysqli_query($link, $sql);
-										
-										while ($rows = mysqli_fetch_array($result,MYSQLI_ASSOC)){
-											echo "<option value='".$rows['id']."'>".$rows['Nama']."</option>";
-										}
-									?>
+							</select></p>
 
-								</select></p>
-
-								<!-- Buat nampilin yang beda sama yang dimaksud -->
-								<table class="table text-left" id="hasil"></table>
-							
-							</div>
-
-							<!-- Buat nampilin soal -->
-							<p><h1 class="content" id="soal"></h1></p>
-
-						<!-- !hidePasLoadingHueHueHue -->
+							<!-- Buat nampilin yang beda sama yang dimaksud -->
+							<table class="table text-left" id="hasil"></table>
+						
 						</div>
 
-					<!-- !main -->
+						<!-- Buat nampilin soal -->
+						<p><h1 class="content" id="soal"></h1></p>
+
+					<!-- !hidePasLoadingHueHueHue -->
 					</div>
+
+				<!-- !main -->
+				</div>
 
 				<!-- Tombol YA, TIDAK, GAK TAU -->
 				<div class="container" id="tombol">
