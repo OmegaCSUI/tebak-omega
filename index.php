@@ -105,15 +105,15 @@
 				</div>
 
 				<!-- Animasi Loading -->
-				<!-- <img class="uil-ripple-css" src="includes/images/gears.svg" id="load"> -->
-				<div 
+				<img class="loader" style="margin: auto; display: block; position: absolute; top: -75px; left: 0; bottom: 0; right: 0;" src="includes/images/gears.svg" id="load">
+				<!-- <div 
 					style='transform:scale(0.6); margin: auto; display: block; position: absolute; top: -75px; left: 0; bottom: 0; right: 0;'
 					class="uil-ripple-css container" 
 					id="load" 
 				>
 					<div></div>
 					<div></div>
-				</div>
+				</div> -->
 
 				<div id="main">
 

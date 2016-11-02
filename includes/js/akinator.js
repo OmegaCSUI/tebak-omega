@@ -1,16 +1,14 @@
 $(document).on({
     ajaxStart: function() { 
-      $('#load').show(); 
-      $('#hidePasLoadingHueHueHue').show(); 
+      $('#load').finish().fadeIn("fast"); 
       $('#ya').addClass("disabled");
       $('#tidak').addClass("disabled");
       $('#gaktau').addClass("disabled");
       $('#protes').addClass("disabled");
       $('#restart').addClass("disabled");      
     },
-     ajaxStop: function() { 
-      $('#load').hide(); 
-      $('#hidePasLoadingHueHueHue').show(); 
+     ajaxComplete: function() { 
+      $('#load').finish().hide(); 
       $('#ya').removeClass("disabled");
       $('#tidak').removeClass("disabled");
       $('#gaktau').removeClass("disabled");
@@ -34,8 +32,8 @@ $(document).ready(function(){
             document.getElementById("soal").innerHTML = data[2];
         });
 
-        $('#soal').show();
-        $("#tombol").show();
+        $('#soal').fadeIn("fast");
+        $("#tombol").fadeIn("fast");
         $('#init').hide();
 
         $("#nama-select").val("").trigger('change');
@@ -70,20 +68,20 @@ $(document).ready(function(){
 
 function jawab(cmd){
     var url = 'includes/php/akinator.php?command=' + cmd;
-
     $.getJSON(url, function(data) {                
         if (data[0] != "") return;
         document.getElementById("soal").innerHTML = data[2];
         if (data[1] == 1){
             skor();
             $('#tombol').hide();
-            $('#protes').show();
-            $('#restart').show();
+            $('#protes').fadeIn("fast");
+            $('#restart').fadeIn("fast");
         }
     });
+    $('#soal').finish().hide().fadeIn("fast");
     if (cmd == 9){
-        $('#soal').show();
-        $('#tombol').show();
+        $('#soal').fadeIn("fast");
+        $('#tombol').fadeIn("fast");
         $('#protes').hide();
         $('#restart').hide();
         $('#finished').hide();
@@ -106,7 +104,7 @@ function skor(){
 function pindah(){ 
   $('.btn#protes').hide();
   $('#soal').hide();
-  $('#finished').show();
+  $('#finished').fadeIn("fast");
 }
 
 function protes(cmd){
@@ -124,13 +122,13 @@ function hilangkan(){
 }
 
 function showAbout(){
-  $('#about').show();
+  $('#about').fadeIn("fast");
   $('#init').hide();
   hilangkan();
 }
 
 function showHome(){
-  $('#init').show();
+  $('#init').fadeIn("fast");
   $('#about').hide();
   hilangkan();
 }
