@@ -10,7 +10,7 @@
 
     $N = 353;  //Banyak Orang
     $M = 50;   //Banyak Pertanyaan
-    $returnValue = array("", 0,0);
+    $returnValue = array("", 0,0,0);  //Indeks 0 buat error, 1 sisa orang, 2 pertanyaan/nama, 3 buat absen jawaban
     $jawaban = 0;
 
     $host     = $GLOBALS['db_host'];
@@ -21,7 +21,7 @@
     $link = mysqli_connect("$host", "$username", "$password", "$db_name");
 
     if (!isset($_GET['command']))
-        show_msg("ngapain mas disini? wkwkwk");
+        show_msg("[ngapain mas disini? wkwkwk]");
 
     if ($_GET['command'] == 9){
         session_unset();
@@ -37,7 +37,7 @@
         // Siapa aja yang udah isi data
         $sql = "SELECT id FROM dataz";
         $result = mysqli_query($link, $sql);
-        if (!$result) show_msg("Gagal query data");
+        if (!$result) show_msg("[Gagal query data]");
 
         while($rows = mysqli_fetch_array($result,MYSQLI_ASSOC))
             $orang[$rows['id']] = 1;
@@ -73,10 +73,11 @@
 
         $sql = "SELECT Nama,counter FROM dataz WHERE id = $jawaban";
         $result = mysqli_query($link, $sql);
-        if (!$result) show_msg("Gagal cari nama orang");
+        if (!$result) show_msg("[Gagal cari nama orang]");
 
         $rows = mysqli_fetch_array($result, MYSQLI_ASSOC);
         $returnValue[2] = $rows['Nama'];
+        $returnValue[3] = $jawaban;
         $_SESSION['ORANG'] = $jawaban;
 
         $tmp = $rows['counter']+1;
@@ -95,7 +96,7 @@
 
             $sql = "SELECT * FROM pertanyaanz WHERE id = $soal";
             $result = mysqli_query($link, $sql);
-            if (!$result) show_msg("Gagal nyari soal");
+            if (!$result) show_msg("[Gagal nyari soal]");
 
             $rows = mysqli_fetch_array($result,MYSQLI_ASSOC);
             

@@ -72,6 +72,10 @@ function jawab(cmd){
         if (data[0] != "") return;
         document.getElementById("soal").innerHTML = data[2];
         if (data[1] == 1){
+            var url = 'https://anak-omega.com/wiki/fetch_image.php?quality=10&file=' + data[3];
+            $.get(url, function(data){
+              $("#foto").attr('src', data);
+            });
             skor();
             $('#tombol').hide();
             $('#protes').fadeIn("fast");

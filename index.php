@@ -152,6 +152,7 @@
 						</div>
 
 						<!-- Buat nampilin soal -->
+						<img id="foto">
 						<p><h1 class="content" id="soal"></h1></p>
 
 					<!-- !hidePasLoadingHueHueHue -->
