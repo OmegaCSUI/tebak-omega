@@ -8,7 +8,7 @@
 	$logged_in = sso_is_logged_in();
 	if ($logged_in) {
 		if (sso_is_authorized()) $_SESSION['logged_in']=1;
-		else how_msg("unauthorized access. hanya untuk omega 2016, fakultas elit dan nomor 1 ui");
+		else show_msg("unauthorized access. hanya untuk omega 2016, fakultas elit dan nomor 1 ui");
 	}
 ?>
 
@@ -47,8 +47,8 @@
 	
 
 		<!-- Custom styles and core js-->
-		<link href="includes/css/custom.css" rel="stylesheet">
-		<script src="includes/js/akinator.js" type="text/javascript"></script>
+		<link href="includes/css/custom.min.css" rel="stylesheet">
+		<script src="includes/js/akinator.min.js" type="text/javascript"></script>
 
 	</head>
 
@@ -106,14 +106,6 @@
 
 				<!-- Animasi Loading -->
 				<img class="loader" style="margin: auto; display: block; position: absolute; top: -75px; left: 0; bottom: 0; right: 0;" src="includes/images/gears.svg" id="load">
-				<!-- <div 
-					style='transform:scale(0.6); margin: auto; display: block; position: absolute; top: -75px; left: 0; bottom: 0; right: 0;'
-					class="uil-ripple-css container" 
-					id="load" 
-				>
-					<div></div>
-					<div></div>
-				</div> -->
 
 				<div id="main">
 
@@ -152,8 +144,10 @@
 						</div>
 
 						<!-- Buat nampilin soal -->
-						<img id="foto">
-						<p><h1 class="content" id="soal"></h1></p>
+						<div class="content" id="containerSoal">
+							<p><img class="img-responsive" style="margin: 0 auto;" id="foto"></p>
+							<p><h1 id="soal"></h1></p>
+						</div>
 
 					<!-- !hidePasLoadingHueHueHue -->
 					</div>
@@ -230,11 +224,11 @@
 										</tr>
 									</thead>
 									<tbody>
-											<tr><td id="1a"></td><td class="text-center" id="1b"></td></tr>
-											<tr><td id="2a"></td><td class="text-center" id="2b"></td></tr>
-											<tr><td id="3a"></td><td class="text-center" id="3b"></td></tr>
-											<tr><td id="4a"></td><td class="text-center" id="4b"></td></tr>
-											<tr><td id="5a"></td><td class="text-center" id="5b"></td></tr>
+										<tr><td id="1a"></td><td class="text-center" id="1b"></td></tr>
+										<tr><td id="2a"></td><td class="text-center" id="2b"></td></tr>
+										<tr><td id="3a"></td><td class="text-center" id="3b"></td></tr>
+										<tr><td id="4a"></td><td class="text-center" id="4b"></td></tr>
+										<tr><td id="5a"></td><td class="text-center" id="5b"></td></tr>
 									</tbody>
 								</table>
 							</div>
